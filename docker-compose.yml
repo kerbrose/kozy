@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  mongodb:
+    image: "mongo"
+    ports:
+     - "27017:27017"
+  server:
+    build: 
+      context: .
+      dockerfile: server/Dockerfile.dev
+    env_file: .env
+    volumes:
+      - .:/home/node/app
+      - ./server/dist:/home/node/app/server/dist
+    depends_on:
+      - mongodb
+    expose:
+      - "8088"
+    ports:
+      - "${APP_PORT}:8088"
+      - "9229:9229"
+    command: npm run debug-brk

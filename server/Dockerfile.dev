@@ -1,0 +1,11 @@
+
+FROM node:12.16.1-buster
+
+RUN mkdir -p /home/node/app/server
+WORKDIR /home/node/app/server
+
+COPY . /home/node/app/server
+
+RUN npm i
+
+USER node
