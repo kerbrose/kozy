@@ -17,8 +17,51 @@
             "group": "build",
             "problemMatcher": "$tsc-watch",
             "presentation": {
-                "reveal": "always",
+                "reveal": "silent",
+                "panel": "dedicated",
+                "group": "build"
             }
-        }
+        },
+        {
+            "label": "docker-compose up",
+            "command": "docker-compose",
+            "args": [
+                "up",
+                "--build"
+            ],
+            "type": "shell",
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".",
+                        "endsPattern": ".",
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "showReuseMessage": false,
+                "panel": "dedicated",
+                "group": "build"
+            },
+        },
+        {
+            "label": "BuildServer",
+            "dependsOn": [
+                "tsc-watch",
+                "docker-compose up"
+            ]
+        },
     ]
 }
